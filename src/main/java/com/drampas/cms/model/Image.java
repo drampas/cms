@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -17,11 +20,13 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
+    private String fileName;
+    private String fileType;
     @Lob
     @Column(columnDefinition = "LONGBLOB")
-    private Byte[] imageContent;
-    @ManyToOne
-    @JoinColumn(name= "articleId",nullable = false)
+    private byte[] image;
+    @OneToMany(cascade = CascadeType.REFRESH,orphanRemoval = false,mappedBy = "image")
     @JsonIgnore
-    private Article article;
+    private List<Article> articles=new ArrayList<>();
 }

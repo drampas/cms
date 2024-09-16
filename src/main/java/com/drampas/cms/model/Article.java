@@ -1,15 +1,11 @@
 package com.drampas.cms.model;
 
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
 @Entity
 @Getter
 @Setter
@@ -20,7 +16,11 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    //@Column(columnDefinition = "varchar(max)") error?? use @Lob instead
+    //using @Lob because an article could be big
+    @Lob
     private String content;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "article")
-    private List<Image> images=new ArrayList<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "imageId",nullable = true,updatable = true)
+    private Image image;
 }

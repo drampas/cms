@@ -1,6 +1,5 @@
 package com.drampas.cms.security;
 
-import com.drampas.cms.repositories.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,26 +7,23 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final AdminRepository adminRepository;
+    private final CustomUserDetailsService userDetailsService;
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return adminRepository.findByUsername(username);
-            }
-        };
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        return new UserDetailsService() {
+//            @Override
+//            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//                return adminRepository.findByUsername(username);
+//            }
+//        };
+//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -38,10 +34,18 @@ public class ApplicationConfig {
         return configuration.getAuthenticationManager();
     }
     @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
-        authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
-        return authenticationProvider;
+    public AuthenticationProvider authenticationProvider(CustomUserDetailsService userDetailsService
+            ,BCryptPasswordEncoder bCryptPasswordEncoder){
+        DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        return daoAuthenticationProvider;
     }
+//    @Bean
+//    public DaoAuthenticationProvider daoAuthenticationProvider(){
+//        DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
+//        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+//        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
+//        return daoAuthenticationProvider;
+//    }
 }
