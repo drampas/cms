@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,7 +25,7 @@ public class ArticleController {
 
     @Operation(description = "Get a list of all articles")
     @SecurityRequirements()
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllArticles(){
         List<Article> articles=articleService.findAll();
         List<ArticleResponse> articleResponses=articles.stream().map(this::entityToResponse).toList();
@@ -32,20 +33,20 @@ public class ArticleController {
     }
     @Operation(description = "Get an article by its id")
     @SecurityRequirements()
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getArticleById(@PathVariable String id){
         Article article=articleService.findArticleById(id);
         ArticleResponse response=entityToResponse(article);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @Operation(description = "Post a new article")
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> saveArticle(@ModelAttribute ArticleDto article){
         articleService.saveOrUpdate(article,article.getImage());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @Operation(description = "Update an existing article")
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateArticle(@ModelAttribute ArticleDto article,@PathVariable String id){
         article.setId(Long.valueOf(id));
         articleService.saveOrUpdate(article, article.getImage());

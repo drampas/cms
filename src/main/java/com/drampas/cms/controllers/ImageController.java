@@ -1,5 +1,6 @@
 package com.drampas.cms.controllers;
 
+import com.drampas.cms.exceptions.UploadFailedException;
 import com.drampas.cms.model.Image;
 import com.drampas.cms.services.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,8 +33,11 @@ public class ImageController {
                 .body(new ByteArrayResource(image.getImage()));
     }
     @Operation(description = "Post an image")
-    @PostMapping
-    public ResponseEntity<?> saveImage(@RequestParam("image") MultipartFile file) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> saveImage(@RequestParam(value = "image") MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new UploadFailedException("file is empty");
+        }
         imageService.saveImage(file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

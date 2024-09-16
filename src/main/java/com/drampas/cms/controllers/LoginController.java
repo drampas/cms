@@ -4,6 +4,8 @@ import com.drampas.cms.authentication.AuthenticationService;
 import com.drampas.cms.authentication.LoginRequest;
 import com.drampas.cms.authentication.LoginResponse;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +22,8 @@ public class LoginController {
 
     private final AuthenticationService authenticationService;
 
+    @Operation(description = "Admin login")
+    @SecurityRequirements()
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest){
         LoginResponse response= authenticationService.login(loginRequest);
