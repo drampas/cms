@@ -6,6 +6,7 @@ import com.drampas.cms.repositories.AdminRepository;
 import com.drampas.cms.repositories.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
+@Profile("dev")
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     private final AdminRepository adminRepository;
