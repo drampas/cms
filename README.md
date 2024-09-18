@@ -19,6 +19,8 @@ and see uploaded images.<br>
 • Project Lombok<br> • MySql 8.0.31<br> •
 OpenApi<br> • Maven
 
+More information and guides on the technologies used and spring boot in general [here]().
+
 ## Getting started
 To get started with this project, you will need to have the following installed on your local machine:<br>
 • JDK 17+<br>
@@ -27,7 +29,7 @@ To get started with this project, you will need to have the following installed 
 
 To build and run the project, follow these steps:<br>
 • Clone the repository to your local machine<br>
-• Add database cms_prod to MySql by running this [script]() *.<br>
+• Add database cms_prod to MySql by running this [script](https://github.com/drampas/cms/blob/main/src/main/resources/scripts/cms_prod_db_creation.sql) *.<br>
 • Build the project: mvn clean install<br>
 • Run the project: mvn spring-boot:run<br>
 
