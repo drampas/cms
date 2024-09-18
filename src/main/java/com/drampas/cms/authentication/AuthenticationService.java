@@ -1,5 +1,6 @@
 package com.drampas.cms.authentication;
 
+import com.drampas.cms.exceptions.InvalidLoginException;
 import com.drampas.cms.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,9 +17,14 @@ public class AuthenticationService {
     private final UserDetailsService userDetailsService;
 
     public LoginResponse login(LoginRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+            );
+        }catch (Exception e){
+            throw  new InvalidLoginException("invalid credentials");
+        }
+
         //the authentication manager checks if the user exists
         var user = userDetailsService.loadUserByUsername(request.getUsername());
         String token = jwtProvider.generateToken(user);

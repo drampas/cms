@@ -2,6 +2,7 @@ package com.drampas.cms.controllers;
 
 import com.drampas.cms.dto.ArticleDto;
 import com.drampas.cms.dto.ArticleResponse;
+import com.drampas.cms.dto.CustomResponse;
 import com.drampas.cms.model.Article;
 import com.drampas.cms.services.ArticleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,27 +36,29 @@ public class ArticleController {
     @SecurityRequirements()
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getArticleById(@PathVariable String id){
-        Article article=articleService.findArticleById(id);
+        Article article=articleService.findArticleById(Long.valueOf(id));
         ArticleResponse response=entityToResponse(article);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @Operation(description = "Post a new article")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> saveArticle(@ModelAttribute ArticleDto article){
-        articleService.saveOrUpdate(article,article.getImage());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        articleService.saveOrUpdate(article,article.getImage(),null);
+        CustomResponse response=new CustomResponse("article saved");
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
     @Operation(description = "Update an existing article")
     @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateArticle(@ModelAttribute ArticleDto article,@PathVariable String id){
-        article.setId(Long.valueOf(id));
-        articleService.saveOrUpdate(article, article.getImage());
+        articleService.saveOrUpdate(article, article.getImage(),Long.valueOf(id));
+        CustomResponse response=new CustomResponse("article updated");
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @Operation(description = "Delete an article")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteArticle(@PathVariable String id){
         articleService.deleteArticle(Long.valueOf(id));
+        CustomResponse response=new CustomResponse("article deleted");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

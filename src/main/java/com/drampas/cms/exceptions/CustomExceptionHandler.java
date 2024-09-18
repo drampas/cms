@@ -3,6 +3,7 @@ package com.drampas.cms.exceptions;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -24,7 +25,8 @@ public class CustomExceptionHandler{
 
     @ExceptionHandler(InvalidLoginException.class)
     public ResponseEntity<?> handleInvalidLogin(InvalidLoginException exception){
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        ErrorResponse response=new ErrorResponse(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(UploadFailedException.class)

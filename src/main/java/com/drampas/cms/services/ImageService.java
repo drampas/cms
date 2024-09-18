@@ -18,7 +18,6 @@ import java.util.Optional;
 public class ImageService {
 
     private final ImageRepository imageRepository;
-    private final ImageConverter imageConverter;
 
     public Image findImageById(Long imageId){
         Optional<Image> imageOptional= imageRepository.findById(imageId);
@@ -28,18 +27,19 @@ public class ImageService {
     }
 
     public void saveImage(MultipartFile file){
-        Image image=new Image();
+        //checking for duplicates
+        if(findImageByFileName(file.getOriginalFilename())!=null){
+            throw new ImageAlreadyExistsException("image already exists");
+        }
         try {
+            Image image=new Image();
             image.setImage(file.getBytes());
             image.setFileType(file.getContentType());
             image.setFileName(file.getOriginalFilename());
+            imageRepository.save(image);
         } catch (IOException e) {
             throw new UploadFailedException(e.getMessage());
         }
-        //checking for duplicates
-        if(findImageByFileName(file.getOriginalFilename())==null){
-            imageRepository.save(image);
-        }else throw new ImageAlreadyExistsException("image already exists");
     }
     public Image findImageByFileName(String fileName){
         Optional<Image> optionalImage=imageRepository.findByFileName(fileName);

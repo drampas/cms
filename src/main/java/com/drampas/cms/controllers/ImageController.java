@@ -1,5 +1,6 @@
 package com.drampas.cms.controllers;
 
+import com.drampas.cms.dto.CustomResponse;
 import com.drampas.cms.exceptions.UploadFailedException;
 import com.drampas.cms.model.Image;
 import com.drampas.cms.services.ImageService;
@@ -39,7 +40,8 @@ public class ImageController {
             throw new UploadFailedException("file is empty");
         }
         imageService.saveImage(file);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        CustomResponse response=new CustomResponse("image saved");
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
 }

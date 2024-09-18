@@ -27,16 +27,22 @@ public class ArticleService {
         return articles;
     }
 
-    public Article findArticleById(String id){
+    public Article findArticleById(Long id){
         Optional<Article> article=articleRepository.findById(Long.valueOf(id));
         if (article.isPresent()){
             return article.get();
         }else throw new ArticleNotFoundException("article not found");
     }
 
-    public void saveOrUpdate(ArticleDto articleDto, MultipartFile file){
-        Article article=new Article();
-        article.setId(articleDto.getId());
+    public void saveOrUpdate(ArticleDto articleDto, MultipartFile file,Long id){
+        //Article article;
+//        if(id==null){
+//            article=new Article();
+//        }else{
+//            article=findArticleById(String.valueOf(id));
+//        }
+        //article.setId(id);
+        Article article = (id == null) ? new Article() : findArticleById(id);
         article.setTitle(articleDto.getTitle());
         article.setContent(articleDto.getContent());
         //checking if the file is empty,but we allow articles without images
@@ -48,6 +54,7 @@ public class ArticleService {
         articleRepository.save(article);
     }
     public void deleteArticle(Long id) {
+        findArticleById(id);
         articleRepository.deleteById(id);
     }
     //Check if the image already exists in the db,and if so return the existing image in order to avoid duplicates
