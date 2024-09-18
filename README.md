@@ -17,9 +17,9 @@ and see uploaded images.<br>
 ## Tecnologies
 • Spring Boot 3.1.4<br>• Spring Security<br> • JSON Web Tokens(JWT)<br> 
 • Project Lombok<br> • MySql 8.0.31<br> •
-OpenApi<br> • Maven
+OpenApi<br> • Maven<br>• Postman
 
-More information and guides on the technologies used and spring boot in general [here](cms/HELP.md).
+More information and guides on the technologies used and spring boot in general [here](https://github.com/drampas/cms/blob/main/HELP.md).
 
 ## Getting started
 To get started with this project, you will need to have the following installed on your local machine:<br>
@@ -32,6 +32,11 @@ To build and run the project, follow these steps:<br>
 • Add database cms_prod to MySql by running this [script](https://github.com/drampas/cms/blob/main/src/main/resources/scripts/cms_prod_db_creation.sql) *.<br>
 • Build the project: mvn clean install<br>
 • Run the project: mvn spring-boot:run<br>
+• To test the application you can use postman(collection
+[here](https://github.com/drampas/cms/blob/main/postman/cms.postman_collection.json)).
 
 The application will be available at http://localhost:8080.<br>
-Documentation will be available at http://localhost:8080/swagger-ui/index.html.
+Documentation will be available at http://localhost:8080/swagger-ui/index.html. <br>
+
+*The script will create the database and the user for the application with NO 
+initial data (articles,images) apart from an admin with its username and password. 
