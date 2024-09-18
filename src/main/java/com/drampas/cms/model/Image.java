@@ -26,7 +26,7 @@ public class Image {
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
-    @OneToMany(cascade = CascadeType.REFRESH,orphanRemoval = false,mappedBy = "image")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},orphanRemoval = false,mappedBy = "image")
     @JsonIgnore
     private List<Article> articles=new ArrayList<>();
 }

@@ -19,7 +19,7 @@ and see uploaded images.<br>
 • Project Lombok<br> • MySql 8.0.31<br> •
 OpenApi<br> • Maven
 
-More information and guides on the technologies used and spring boot in general [here]().
+More information and guides on the technologies used and spring boot in general [here](cms/HELP.md).
 
 ## Getting started
 To get started with this project, you will need to have the following installed on your local machine:<br>

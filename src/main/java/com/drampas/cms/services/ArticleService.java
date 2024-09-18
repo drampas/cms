@@ -2,6 +2,7 @@ package com.drampas.cms.services;
 
 import com.drampas.cms.dto.ArticleDto;
 import com.drampas.cms.exceptions.ArticleNotFoundException;
+import com.drampas.cms.exceptions.InvalidArticleException;
 import com.drampas.cms.model.Article;
 import com.drampas.cms.model.Image;
 import com.drampas.cms.repositories.ArticleRepository;
@@ -35,16 +36,15 @@ public class ArticleService {
     }
 
     public void saveOrUpdate(ArticleDto articleDto, MultipartFile file,Long id){
-        //Article article;
-//        if(id==null){
-//            article=new Article();
-//        }else{
-//            article=findArticleById(String.valueOf(id));
-//        }
-        //article.setId(id);
         Article article = (id == null) ? new Article() : findArticleById(id);
+
+        //checking if the article has title and content(could use validation)
+        if(articleDto.getTitle().isEmpty() || articleDto.getContent().isEmpty()){
+            throw new InvalidArticleException("article title and article content are required");
+        }
         article.setTitle(articleDto.getTitle());
         article.setContent(articleDto.getContent());
+
         //checking if the file is empty,but we allow articles without images
         if(!file.isEmpty()){
             Image image=duplicateResolver(file);

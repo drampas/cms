@@ -43,5 +43,12 @@ public class ImageController {
         CustomResponse response=new CustomResponse("image saved");
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
+    @Operation(description = "Delete an article")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteArticle(@PathVariable String id){
+        imageService.deleteImage(Long.valueOf(id));
+        CustomResponse response=new CustomResponse("image deleted");
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
 
 }

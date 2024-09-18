@@ -41,6 +41,12 @@ public class ImageService {
             throw new UploadFailedException(e.getMessage());
         }
     }
+
+    public void deleteImage(Long id){
+        Image image = findImageById(id);
+        image.getArticles().forEach(article -> {article.setImage(null);});
+        imageRepository.deleteById(id);
+    }
     public Image findImageByFileName(String fileName){
         Optional<Image> optionalImage=imageRepository.findByFileName(fileName);
         if(optionalImage.isPresent()){

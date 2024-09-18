@@ -35,7 +35,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/articles/2",
+							"raw": "http://localhost:8080/api/articles/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -44,7 +44,7 @@
 							"path": [
 								"api",
 								"articles",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -53,9 +53,6 @@
 				{
 					"name": "getImageById",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -114,23 +111,23 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "new title",
+									"value": "Updated title",
 									"type": "text"
 								},
 								{
 									"key": "content",
-									"value": "new content",
+									"value": "Updated Article content",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/dramp/OneDrive/Υπολογιστής/rome/photos/IMG_20230327_162009.jpg"
+									"src": []
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/articles/2",
+							"raw": "http://localhost:8080/api/articles/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -139,7 +136,7 @@
 							"path": [
 								"api",
 								"articles",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -151,7 +148,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/articles/2",
+							"raw": "http://localhost:8080/api/articles/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -160,7 +157,7 @@
 							"path": [
 								"api",
 								"articles",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -169,16 +166,6 @@
 				{
 					"name": "postImage",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjE0MzAyMSwiZXhwIjoxNzI2MjI5NDIxfQ.cJ57iLfkiHCGGNizvEa5RTUmiAlWh3QMGqSgF_BfuXY",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -187,7 +174,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/dramp/OneDrive/Υπολογιστής/rome/photos/IMG_20230329_133150.jpg"
+									"src": []
 								}
 							]
 						},
@@ -227,7 +214,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/dramp/OneDrive/Υπολογιστής/rome/photos/IMG_20230329_121512.jpg"
+									"src": []
 								}
 							]
 						},
@@ -241,6 +228,27 @@
 							"path": [
 								"api",
 								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteImage",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/images/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"images",
+								"1"
 							]
 						}
 					},

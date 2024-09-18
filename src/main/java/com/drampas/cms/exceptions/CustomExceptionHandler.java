@@ -40,4 +40,9 @@ public class CustomExceptionHandler{
         ErrorResponse response=new ErrorResponse(exception.getMessage());
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(InvalidArticleException.class)
+    public ResponseEntity<?> handleInvalidArticle(InvalidArticleException exception){
+        ErrorResponse response=new ErrorResponse(exception.getMessage());
+        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+    }
 }
