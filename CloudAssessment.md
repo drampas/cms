@@ -10,7 +10,7 @@ all aspects of the infrastructure.Also, Lambda scales automatically in response 
 of requests,and so we don't need to manage scaling.
 
 Next we would use API Gateway(AWS) which allows us to secure and monitor our application and also makes
-it easier for our spring boot application to be deployed in Lambda by converting Lambda events into HTTP requests.
+it easier for our spring boot application to be deployed in Lambda.
 API Gateway can also handle authentication and authorization for our application with built-in mechanisms like
 IAM,Amazon Cognito User Pools and Lambda Authorizers.In our case we would use Amazon Cognito User Pools
 that manages authentication and authorization using JWT (JSON Web Tokens).When it comes to monitoring,
