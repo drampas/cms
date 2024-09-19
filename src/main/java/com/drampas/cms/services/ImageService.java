@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 
 @Service
@@ -26,10 +25,10 @@ public class ImageService {
         }else throw new ImageNotFoundException("image not found");
     }
 
-    public void saveImage(MultipartFile file){
-        //checking for duplicates
+    public Long saveImage(MultipartFile file){
+        //checking for duplicates and returning the existing image id through the exception
         if(findImageByFileName(file.getOriginalFilename())!=null){
-            throw new ImageAlreadyExistsException("image already exists");
+            throw new ImageAlreadyExistsException("image already exists with id: "+findImageByFileName(file.getOriginalFilename()).getId());
         }
         try {
             Image image=new Image();
@@ -40,6 +39,8 @@ public class ImageService {
         } catch (IOException e) {
             throw new UploadFailedException(e.getMessage());
         }
+        Long id=findImageByFileName(file.getOriginalFilename()).getId();
+        return id;
     }
 
     public void deleteImage(Long id){

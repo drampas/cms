@@ -29,19 +29,19 @@ public class ArticleService {
     }
 
     public Article findArticleById(Long id){
-        Optional<Article> article=articleRepository.findById(Long.valueOf(id));
+        Optional<Article> article=articleRepository.findById(id);
         if (article.isPresent()){
             return article.get();
         }else throw new ArticleNotFoundException("article not found");
     }
 
     public void saveOrUpdate(ArticleDto articleDto, MultipartFile file,Long id){
-        Article article = (id == null) ? new Article() : findArticleById(id);
-
         //checking if the article has title and content(could use validation)
         if(articleDto.getTitle().isEmpty() || articleDto.getContent().isEmpty()){
             throw new InvalidArticleException("article title and article content are required");
         }
+        Article article = (id == null) ? new Article() : findArticleById(id);
+
         article.setTitle(articleDto.getTitle());
         article.setContent(articleDto.getContent());
 

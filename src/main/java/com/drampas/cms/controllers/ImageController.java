@@ -5,7 +5,6 @@ import com.drampas.cms.exceptions.UploadFailedException;
 import com.drampas.cms.model.Image;
 import com.drampas.cms.services.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
@@ -39,8 +38,8 @@ public class ImageController {
         if (file.isEmpty()) {
             throw new UploadFailedException("file is empty");
         }
-        imageService.saveImage(file);
-        CustomResponse response=new CustomResponse("image saved");
+        Long id=imageService.saveImage(file);
+        CustomResponse response=new CustomResponse("image saved with id:"+id);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
     @Operation(description = "Delete an article")

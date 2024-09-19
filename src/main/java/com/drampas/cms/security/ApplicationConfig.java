@@ -15,16 +15,6 @@ public class ApplicationConfig {
 
     private final CustomUserDetailsService userDetailsService;
 
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        return new UserDetailsService() {
-//            @Override
-//            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//                return adminRepository.findByUsername(username);
-//            }
-//        };
-//    }
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
@@ -41,11 +31,5 @@ public class ApplicationConfig {
         daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return daoAuthenticationProvider;
     }
-//    @Bean
-//    public DaoAuthenticationProvider daoAuthenticationProvider(){
-//        DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
-//        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-//        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
-//        return daoAuthenticationProvider;
-//    }
+
 }

@@ -1,9 +1,6 @@
 package com.drampas.cms.exceptions;
 
-
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -34,7 +31,7 @@ public class CustomExceptionHandler{
         ErrorResponse response=new ErrorResponse(exception.getMessage());
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
-    //java.sql.SQLIntegrityConstraintViolationException
+
     @ExceptionHandler(ImageAlreadyExistsException.class)
     public ResponseEntity<?> handleImageAlreadyExist(ImageAlreadyExistsException exception){
         ErrorResponse response=new ErrorResponse(exception.getMessage());

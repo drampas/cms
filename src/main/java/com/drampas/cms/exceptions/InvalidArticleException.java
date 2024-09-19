@@ -1,6 +1,5 @@
 package com.drampas.cms.exceptions;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 

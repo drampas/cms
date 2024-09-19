@@ -1,6 +1,5 @@
 package com.drampas.cms.dto;
 
-import com.drampas.cms.model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

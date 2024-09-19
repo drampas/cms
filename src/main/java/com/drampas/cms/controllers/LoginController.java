@@ -3,7 +3,6 @@ package com.drampas.cms.controllers;
 import com.drampas.cms.authentication.AuthenticationService;
 import com.drampas.cms.authentication.LoginRequest;
 import com.drampas.cms.authentication.LoginResponse;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.RequiredArgsConstructor;
