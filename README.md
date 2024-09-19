@@ -30,6 +30,8 @@ To get started with this project, you will need to have the following installed 
 To build and run the project, follow these steps:<br>
 • Clone the repository to your local machine<br>
 • Add database cms_prod to MySql by running this [script](https://github.com/drampas/cms/blob/main/src/main/resources/scripts/cms_prod_db_creation.sql) *.<br>
+• If you have an IDE installed you can open the project and run it from there<br>
+• Using your terminal navigate to the project's directory<br>
 • Build the project: mvn clean install<br>
 • Run the project: mvn spring-boot:run<br>
 • To test the application you can use postman(collection
@@ -39,4 +41,6 @@ The application will be available at http://localhost:8080.<br>
 Documentation will be available at http://localhost:8080/swagger-ui/index.html. <br>
 
 *The script will create the database and the user for the application with NO 
-initial data (articles,images) apart from an admin with its username and password. 
+initial data (articles,images) apart from an admin with its username and password.<br>
+The project can also run in the "dev" profile (check application-dev.yml before switching!!!),by changing the spring.profiles.active
+in the application.properties file,which allows you to bootstrap the app through the DataInitializer class.
