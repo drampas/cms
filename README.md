@@ -35,7 +35,7 @@ To build and run the project, follow these steps:<br>
 • Build the project: mvn clean install<br>
 • Run the project: mvn spring-boot:run<br>
 • To test the application you can use postman(collection
-[here](https://github.com/drampas/cms/blob/main/postman/cms.postman_collection.json)).
+[here](https://github.com/drampas/cms/blob/main/postman/cms.postman_collection.json)).<br>
 • To stop the application hit Ctrl+c
 
 The application will be available at http://localhost:8080.<br>
